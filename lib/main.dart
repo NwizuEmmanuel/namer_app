@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:english_words/english_words.dart';
-import 'dart:io' show Platform;
 
 void main() {
   runApp(MyApp());
@@ -121,22 +120,7 @@ class FavoritePage extends StatelessWidget {
           ),
       ],
     );
-
-    if (Platform.isAndroid || Platform.isIOS) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Favorites',
-            style: TextStyle(color: Colors.white),
-          ),
-          iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
-        body: listView,
-      );
-    } else {
-      return listView;
-    }
+    return listView;
   }
 }
 
@@ -162,39 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
-    }
-
-    if (Platform.isAndroid || Platform.isIOS) {
-      return Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'Namer App',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            iconTheme: const IconThemeData(color: Colors.white),
-            centerTitle: true,
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          drawer: Drawer(
-            child: ListView(
-              children: [
-                ListTile(
-                  leading: Icon(Icons.favorite),
-                  title: Text('Favorites'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FavoritePage()),
-                    );
-                  },
-                )
-              ],
-            ),
-          ),
-          body: const GeneratorPage());
     }
 
     return LayoutBuilder(builder: (context, constraints) {
